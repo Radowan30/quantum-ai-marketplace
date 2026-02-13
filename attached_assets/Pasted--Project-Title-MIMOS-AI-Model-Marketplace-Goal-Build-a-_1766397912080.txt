@@ -1,0 +1,109 @@
+# Project Title: MIMOS AI Model Marketplace
+**Goal:** Build a comprehensive web application for an AI Model Marketplace owned by MIMOS (Malaysia's national Applied R&D Centre).
+
+## 1. Design & Branding
+* **Theme:** Professional, Research-oriented, Modern.
+* **Color Palette:** Use colors complementary to the MIMOS logo.
+    * **Primary Brand Color:** Deep Magenta/Purple (Hex approx: #981E7D) - Use for navbars, primary buttons, and accents.
+    * **Secondary Color:** Grey (Hex approx: #A8A9AD) - Use for borders, secondary text, and graphical elements (arches).
+    * **Background:** Clean white or light grey for readability.
+* **Responsiveness:** Fully responsive (Desktop + Mobile). Mobile view requires a hamburger menu for the sidebar.
+
+## 2. User Roles & Authentication
+* **Roles:**
+    1.  **Publisher:** Can upload models, view analytics, manage subscriptions.
+    2.  **Buyer:** Can browse, subscribe, and download models.
+* **Auth Flow:** Login/Register via Email/Password OR Google OAuth.
+* **Routing:**
+    * Buyers -> Redirect to Buyer Portal.
+    * Publishers -> Redirect to Publisher Portal.
+
+## 3. Page Requirements & Features
+
+### A. Landing Page (Public)
+* **Hero Section:** Welcoming title/visuals.
+* **Branding Section:** Display the MIMOS Logo with the text: "Powered by MIMOS".
+    * *Subtext:* "MIMOS is Malaysia's national Applied Research and Development Centre that contributes to socio-economic growth through innovative technology platforms."
+* **Stats Section:** Display dynamic counters for "Total Models" and "Active Users".
+* **Info Section:** Explanation of what can be done on the platform.
+* **Footer:** "All rights reserved."
+* **Actions:** Login/Register buttons (toggle between Buyer/Publisher registration).
+
+### B. Publisher Portal
+**Layout:** Permanent Sidebar (Desktop) / Slide-in Hamburger (Mobile). Sidebar contains user info + logout.
+
+1.  **Analytics Page (Dashboard):**
+    * **KPI Cards:** Total Models, Total Views (all models), Total Active Subscriptions.
+    * **Charts:**
+        * "Model Views Over Time" (Line chart, views per week).
+        * "Models by Category" (Pie/Bar chart).
+    * **Tables:**
+        * "Most Viewed Models": Columns [Name, Views, Status, Category].
+        * "Model Subscribers": Columns [Subscriber Name, Email, Model Name, Status, Subscription Date].
+
+2.  **Marketplace Page (Preview Mode):**
+    * Search bar (by model name) + Filter (by Category).
+    * Grid of Model Cards (All models from all publishers).
+    * *Note:* Publishers can click cards to view details but **cannot** subscribe. Display a banner: "Preview Only - Use Buyer Account to Subscribe."
+
+3.  **My Models Page:**
+    * **Header Stats:** Total Models, Published Count, Total Users.
+    * **List View:** Search bar + Filter (Category, Status: Draft/Published).
+    * **Empty State:** "No models found" with a "+ New Model" button.
+    * **Create Model Overlay (Wizard):**
+        * *Tab 1: General:* Name (Req, max 25 chars), Description (Req, max 700 chars), Categories (Multi-select, Req), Version (Req). Buttons: Cancel / Next.
+        * *Tab 2: Details:* Features (Comma-separated list input), Response Time (ms), Accuracy (%), API Spec/Docs (Long text field supporting JSON/YAML/Markdown rendering).
+        * *Tab 3: Files:*
+            * Input: File Name (Req).
+            * Type Selector: "Upload File (<100MB)" OR "External URL (>100MB)".
+            * Logic: If Upload, use file picker. If URL, use text input.
+            * Description (Optional).
+            * *Notice:* "Files under 100MB can be uploaded directly, use URLs for larger resources."
+        * *Tab 4: Collaborators:* Add by Email (First, Last, Email) OR Select existing Publisher from dropdown. List added collaborators with Delete option.
+        * *Submit:* "Create Model" button.
+
+4.  **Settings Page:** Edit Profile (Name, Email, Company Name, Bio).
+
+### C. Buyer Portal
+**Layout:** Permanent Sidebar (Desktop) / Slide-in Hamburger (Mobile).
+
+1.  **Dashboard Page:**
+    * Stats: Available Models, My Subscriptions.
+    * Quick Actions: "Browse Marketplace", "Manage Subscriptions".
+    * "Recent Activity": List of latest purchases/cancellations.
+
+2.  **Marketplace Page (Action Mode):**
+    * Same UI as Publisher Marketplace but includes filter for "Subscribed Models".
+    * Clicking a card opens **Model Details View**.
+
+3.  **My Purchases Page:**
+    * Section 1: Active Subscriptions.
+    * Section 2: Previous Purchases (Expired/Cancelled).
+
+4.  **Settings Page:** Edit Profile.
+
+### D. Model Details View (Shared UI Component)
+* **Header:** Model Name, Description, Subscription Status (if Buyer).
+* **Key Stats:** Version, Response Time, Accuracy, Uptime.
+* **Action Area (Buyer Only):**
+    * "Subscribe" button.
+    * **Logic:**
+        * *Free Model:* Instant access -> Status becomes "Active".
+        * *Paid Model:* Status becomes "Pending Approval". Show message: "Waiting for publisher approval. Payment system coming soon."
+* **Detailed Tabs:**
+    1.  **Info:** Key Features list, Creator/Collaborator links (mailto), Dates (Published/Updated), Help & Report section, Access Status (Free vs Price).
+    2.  **Docs:** Renders the Markdown/JSON/YAML documentation.
+    3.  **Discuss:** Discussion board. Users can "+ Start Discussion", view threads, and comment.
+    4.  **Files:** List files.
+        * *Access Control:* Download buttons only visible to **Subscribed Buyers**.
+        * *Large Files:* If >100MB (URL type), only show link if subscribed.
+    5.  **Stats:** Page Views (30 days), Active Subscribers, Engagement Rate (Subs/Views), Discussion Count.
+
+## 5. Implementation Notes
+* **File Storage:** Ensure the backend handles file uploads (multipart/form-data) for the <100MB constraint.
+* **Data Structure:**
+    * `Users` (id, email, role, profile_data)
+    * `Models` (id, publisher_id, metadata, stats)
+    * `Files` (id, model_id, type, path_or_url)
+    * `Subscriptions` (id, buyer_id, model_id, status [active/pending/cancelled], type [free/paid])
+    * `Discussions` (id, model_id, user_id, content, parent_id for replies)
