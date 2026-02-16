@@ -3,6 +3,8 @@ import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Target, Eye, Lightbulb, Users, Award, BookOpen } from "lucide-react";
+import { WaveBackground } from "@/components/effects/WaveBackground";
+import { CircuitOverlay } from "@/components/effects/CircuitOverlay";
 
 export default function AboutPage() {
   // Reset scroll position to top when page loads
@@ -35,7 +37,8 @@ export default function AboutPage() {
     <Layout type="public">
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[500px] flex items-center pt-32 pb-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-indigo-500/5" />
+        <WaveBackground intensity="subtle" />
+        <CircuitOverlay opacity={0.1} animated={false} />
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -44,12 +47,12 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-heading font-bold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-700 to-indigo-600 pb-2">
+            <h1 className="text-5xl md:text-6xl font-heading font-bold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#7855DD] via-[#4F46E5] to-[#7855DD] pb-2 animate-gradient">
               About Our Platform
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              We're building the future of AI model integration, making powerful
-              artificial intelligence accessible to developers and businesses
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              We're building the future of quantum AI model integration, making powerful
+              quantum-enhanced artificial intelligence accessible to developers and businesses
               worldwide.
             </p>
           </motion.div>
@@ -57,33 +60,34 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
+      <section className="py-20 relative">
+        <CircuitOverlay opacity={0.05} animated={false} />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-primary/10 via-purple-500/10 to-indigo-500/10 rounded-2xl p-8 md:p-12 border border-primary/20"
+              className="glass-quantum rounded-2xl p-8 md:p-12 border border-[#7855DD]/20"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center">
-                  <Target className="w-7 h-7 text-primary" />
+                <div className="w-14 h-14 rounded-xl bg-[#7855DD]/20 border border-[#7855DD]/30 flex items-center justify-center">
+                  <Target className="w-7 h-7 text-[#7855DD]" style={{ filter: 'drop-shadow(0 0 6px rgba(120, 85, 221, 0.4))' }} />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-heading font-bold">
+                <h2 className="text-3xl md:text-4xl font-heading font-bold text-white">
                   Our Mission
                 </h2>
               </div>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                To democratize access to cutting-edge AI models by creating a
-                secure, reliable, and user-friendly marketplace that connects AI
+              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                To democratize access to cutting-edge quantum AI models by creating a
+                secure, reliable, and user-friendly marketplace that connects quantum AI
                 researchers with developers and businesses worldwide.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe that artificial intelligence should be accessible to
+              <p className="text-lg text-gray-300 leading-relaxed">
+                We believe that quantum-enhanced artificial intelligence should be accessible to
                 everyone, not just large corporations with extensive resources.
-                Our platform bridges the gap between AI innovation and practical
+                Our platform bridges the gap between quantum AI innovation and practical
                 application.
               </p>
             </motion.div>
@@ -92,8 +96,9 @@ export default function AboutPage() {
       </section>
 
       {/* Vision Section */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
-        <div className="container mx-auto px-6">
+      <section className="py-20 bg-[#0A0A0F]/50 relative">
+        <CircuitOverlay opacity={0.05} animated={false} />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -103,15 +108,15 @@ export default function AboutPage() {
               className="text-center"
             >
               <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#7855DD] to-[#4F46E5] flex items-center justify-center shadow-lg shadow-[#7855DD]/30">
                   <Eye className="w-7 h-7 text-white" />
                 </div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-white">
                 Our Vision
               </h2>
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                A world where AI innovation drives progress for everyone
+              <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
+                A world where quantum AI innovation drives progress for everyone
               </p>
             </motion.div>
           </div>
@@ -119,8 +124,9 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
+      <section className="py-20 relative">
+        <CircuitOverlay opacity={0.03} animated={false} />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -129,10 +135,10 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-white">
                 Our Values
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-gray-300">
                 The principles that guide everything we do
               </p>
             </motion.div>
@@ -145,15 +151,15 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-card border border-border rounded-xl p-8 hover:shadow-lg transition-shadow"
+                  className="glass-quantum border border-[#7855DD]/20 rounded-xl p-8 hover:shadow-xl hover:shadow-[#7855DD]/10 hover:border-[#7855DD]/40 transition-all"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
-                    <value.icon className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-lg bg-[#7855DD]/15 border border-[#7855DD]/30 flex items-center justify-center mb-6">
+                    <value.icon className="w-6 h-6 text-[#7855DD]" style={{ filter: 'drop-shadow(0 0 4px rgba(120, 85, 221, 0.3))' }} />
                   </div>
-                  <h3 className="text-xl font-heading font-bold mb-4">
+                  <h3 className="text-xl font-heading font-bold mb-4 text-white">
                     {value.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     {value.description}
                   </p>
                 </motion.div>

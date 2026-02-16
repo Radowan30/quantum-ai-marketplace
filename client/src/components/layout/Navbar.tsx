@@ -51,9 +51,9 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isDashboard
-          ? "bg-background/95 backdrop-blur-sm border-border"
+          ? "bg-[#0A0A0F]/95 backdrop-blur-md border-[#7855DD]/20"
           : scrolled
-          ? "bg-background/95 backdrop-blur-sm shadow-sm border-border"
+          ? "glass-quantum border-[#7855DD]/20 shadow-lg shadow-[#7855DD]/5"
           : "bg-transparent border-transparent"
       }`}
     >
@@ -85,28 +85,28 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
         >
           {/* Mobile Layout - Vertical stacking */}
           <div className="flex flex-col items-center gap-1 md:hidden py-1">
-            <div className="w-5 h-5 bg-primary rounded-md flex items-center justify-center shadow-sm">
-              <span className="text-primary-foreground font-bold text-xs tracking-tighter">M</span>
+            <div className="w-5 h-5 bg-[#7855DD] rounded-md flex items-center justify-center shadow-sm shadow-[#7855DD]/30">
+              <span className="text-white font-bold text-xs tracking-tighter">M</span>
             </div>
-            <span className="font-heading font-bold text-[9px] leading-none text-foreground">
+            <span className="font-heading font-bold text-[9px] leading-none text-white">
               MIMOS
             </span>
-            <span className="text-[6px] tracking-wider uppercase opacity-70 text-muted-foreground leading-none">
-              AI Marketplace
+            <span className="text-[6px] tracking-wider uppercase opacity-70 text-gray-400 leading-none">
+              Quantum AI
             </span>
           </div>
 
           {/* Desktop Layout - Horizontal */}
           <div className="hidden md:flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-md">
-              <span className="text-primary-foreground font-bold text-xl tracking-tighter">M</span>
+            <div className="w-10 h-10 bg-[#7855DD] rounded-lg flex items-center justify-center shadow-md shadow-[#7855DD]/30">
+              <span className="text-white font-bold text-xl tracking-tighter">M</span>
             </div>
             <div className="flex flex-col">
-              <span className={`font-heading font-bold leading-none ${scrolled || isDashboard ? "text-foreground" : "text-foreground"}`}>
+              <span className="font-heading font-bold leading-none text-white">
                 MIMOS
               </span>
-              <span className={`text-[10px] tracking-wider uppercase opacity-70 ${scrolled || isDashboard ? "text-muted-foreground" : "text-muted-foreground"}`}>
-                AI Marketplace
+              <span className="text-[10px] tracking-wider uppercase opacity-70 text-gray-400">
+                Quantum AI Marketplace
               </span>
             </div>
           </div>
@@ -139,18 +139,21 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
                 window.history.pushState({}, '', '/');
                 window.dispatchEvent(new HashChangeEvent('hashchange'));
               }}
-              className="text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+              className="text-sm font-medium text-gray-300 hover:text-[#7855DD] transition-colors cursor-pointer"
             >
               Home
             </a>
-            <a href="/#features" className="text-sm font-medium hover:text-primary transition-colors">
+            <a href="/#features" className="text-sm font-medium text-gray-300 hover:text-[#7855DD] transition-colors">
               Features
             </a>
             <Link href="/about">
-              <a className="text-sm font-medium hover:text-primary transition-colors">About Us</a>
+              <a className="text-sm font-medium text-gray-300 hover:text-[#7855DD] transition-colors">About Us</a>
             </Link>
             <Link href="/auth">
-              <Button variant="default" size="sm">
+              <Button
+                size="sm"
+                className="bg-[#7855DD] hover:bg-[#7855DD]/90 text-white shadow-md shadow-[#7855DD]/20"
+              >
                 Login / Register
               </Button>
             </Link>
@@ -188,7 +191,7 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
 
       {/* Mobile Menu - Public only */}
       {!isDashboard && mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b p-4 shadow-lg flex flex-col gap-4 animate-in slide-in-from-top-2">
+        <div className="md:hidden absolute top-16 left-0 right-0 glass-quantum border-b border-[#7855DD]/20 p-4 shadow-lg flex flex-col gap-4 animate-in slide-in-from-top-2">
           <a
             href="/"
             onClick={(e) => {
@@ -197,18 +200,18 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
               window.history.pushState({}, '', '/');
               window.dispatchEvent(new HashChangeEvent('hashchange'));
             }}
-            className="text-sm font-medium py-2 cursor-pointer"
+            className="text-sm font-medium py-2 cursor-pointer text-gray-300 hover:text-[#7855DD] transition-colors"
           >
             Home
           </a>
-          <a href="/#features" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium py-2">
+          <a href="/#features" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium py-2 text-gray-300 hover:text-[#7855DD] transition-colors">
             Features
           </a>
           <Link href="/about" onClick={() => setMobileMenuOpen(false)}>
-            <a className="text-sm font-medium py-2">About Us</a>
+            <a className="text-sm font-medium py-2 text-gray-300 hover:text-[#7855DD] transition-colors">About Us</a>
           </Link>
           <Link href="/auth" onClick={() => setMobileMenuOpen(false)}>
-            <Button className="w-full">Login</Button>
+            <Button className="w-full bg-[#7855DD] hover:bg-[#7855DD]/90">Login</Button>
           </Link>
         </div>
       )}

@@ -13,7 +13,7 @@ export function Layout({ children, type = "public", showSidebar = true }: Layout
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
+    <div className="min-h-screen bg-[#0A0A0F] font-sans text-gray-100">
       <Navbar
         layout={type}
         onMobileSidebarToggle={() => setMobileSidebarOpen(!mobileSidebarOpen)}

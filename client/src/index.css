@@ -53,10 +53,21 @@
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 
+  /* Quantum color palette */
+  --color-quantum-purple: #7855DD;
+  --color-deep-indigo: #4F46E5;
+  --color-void-black: #0A0A0F;
+  --color-circuit-glow: #A78BFA;
+  --color-energy-highlight: #60A5FA;
+  --color-purple-black: #1A1625;
+
   --font-sans: "Inter", sans-serif;
   --font-heading: "Plus Jakarta Sans", sans-serif;
-  
+
   --radius: 0.5rem;
+
+  /* Utility scale for hover effects */
+  --scale-102: 1.02;
 }
 
 :root {
@@ -111,49 +122,49 @@
 }
 
 .dark {
-  /* Dark mode mappings (if needed later, but prioritizing light for "Clean white or light grey") */
-  --background: 313 40% 5%; 
+  /* Quantum Dark Mode - Default */
+  --background: 240 25% 3%; /* Void Black #0A0A0F */
   --foreground: 0 0% 98%;
 
-  --card: 313 40% 8%;
+  --card: 253 20% 8%;
   --card-foreground: 0 0% 98%;
 
-  --popover: 313 40% 8%;
+  --popover: 253 20% 8%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 313 67% 45%; /* Slightly lighter for dark mode */
+  --primary: 253 65% 60%; /* Quantum Purple #7855DD */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 313 20% 15%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 243 80% 60%; /* Deep Indigo #4F46E5 */
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 313 20% 15%;
-  --muted-foreground: 313 10% 65%;
+  --muted: 253 20% 15%;
+  --muted-foreground: 0 0% 63%; /* #9CA3AF */
 
-  --accent: 313 20% 20%;
+  --accent: 253 20% 20%;
   --accent-foreground: 0 0% 98%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 313 20% 20%;
-  --input: 313 20% 20%;
-  --ring: 313 67% 45%;
+  --border: 253 20% 20%;
+  --input: 253 20% 20%;
+  --ring: 253 65% 60%;
 
-  --chart-1: 313 67% 45%;
-  --chart-2: 280 60% 55%;
-  --chart-3: 330 70% 60%;
-  --chart-4: 228 3% 67%;
+  --chart-1: 253 65% 60%;
+  --chart-2: 243 80% 60%;
+  --chart-3: 253 100% 70%;
+  --chart-4: 190 90% 50%;
   --chart-5: 45 90% 60%;
 
-  --sidebar: 313 40% 8%;
+  --sidebar: 240 25% 5%;
   --sidebar-foreground: 240 4.8% 95.9%;
-  --sidebar-primary: 313 67% 45%;
+  --sidebar-primary: 253 65% 60%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 313 20% 15%;
+  --sidebar-accent: 253 20% 15%;
   --sidebar-accent-foreground: 240 4.8% 95.9%;
-  --sidebar-border: 313 20% 20%;
-  --sidebar-ring: 313 67% 45%;
+  --sidebar-border: 253 20% 20%;
+  --sidebar-ring: 253 65% 60%;
 }
 
 @layer base {
@@ -164,6 +175,78 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold text-primary;
+    @apply font-heading font-bold;
+  }
+}
+
+/* Quantum Theme Animations & Effects */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes quantum-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient-shift 10s ease infinite;
+}
+
+.quantum-glow {
+  text-shadow: 0 0 40px rgba(120, 85, 221, 0.5);
+}
+
+.quantum-glow-sm {
+  text-shadow: 0 0 20px rgba(120, 85, 221, 0.3);
+}
+
+.quantum-border-glow {
+  box-shadow: 0 0 20px rgba(120, 85, 221, 0.2),
+              0 0 40px rgba(120, 85, 221, 0.1);
+}
+
+.quantum-border-glow-intense {
+  box-shadow: 0 0 30px rgba(120, 85, 221, 0.4),
+              0 0 60px rgba(120, 85, 221, 0.2),
+              inset 0 0 20px rgba(120, 85, 221, 0.1);
+}
+
+/* Glass-morphism utilities */
+.glass-quantum {
+  background: rgba(120, 85, 221, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-quantum-hover {
+  background: rgba(120, 85, 221, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Support for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient {
+    animation: none;
+    background-position: 0% 50%;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
