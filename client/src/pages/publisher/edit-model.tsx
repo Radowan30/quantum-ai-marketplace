@@ -161,6 +161,7 @@ export default function EditModelPage() {
   const [priceType, setPriceType] = useState<"free" | "paid" | "">("");
   const [price, setPrice] = useState("");
   const [detailedDescription, setDetailedDescription] = useState("");
+  const [liveLink, setLiveLink] = useState("");
 
   // Tab 2: Technical Details state
   const [featuresInput, setFeaturesInput] = useState("");
@@ -213,6 +214,7 @@ export default function EditModelPage() {
         setAccuracy(fetchedModel.stats.accuracy.toString());
         setApiSpec(fetchedModel.apiDocumentation || "");
         setApiSpecFormat(fetchedModel.apiSpecFormat || "json");
+        setLiveLink(fetchedModel.liveLink || "");
 
         // Fetch model's categories
         const { data: modelCategoriesData, error: modelCategoriesError } =
@@ -650,6 +652,7 @@ export default function EditModelPage() {
         accuracy: parseFloat(accuracy),
         apiDocumentation: apiSpec || null,
         apiSpecFormat: apiSpecFormat,
+        liveLink: liveLink.trim() || null,
         status: model.status,
         subscriptionType: priceType,
         priceAmount: priceType === "paid" ? parseFloat(price) : null,
@@ -1430,6 +1433,20 @@ export default function EditModelPage() {
                       )}
                     </div>
                   )}
+
+                  <div className="space-y-2">
+                    <Label>
+                      Live Link
+                    </Label>
+                    <Input
+                      placeholder="https://your-model-demo.example.com"
+                      value={liveLink}
+                      onChange={(e) => setLiveLink(e.target.value)}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Link to a live hosted version users can try out.
+                    </p>
+                  </div>
 
                   <div className="space-y-2">
                     <Label>Detailed Description</Label>

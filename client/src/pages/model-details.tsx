@@ -1375,6 +1375,29 @@ export default function ModelDetailsPage() {
           </div>
         </div>
 
+        {/* Live Link */}
+        {model.liveLink && (
+          <a
+            href={model.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 w-full p-4 rounded-xl border border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-colors group"
+          >
+            <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors shrink-0">
+              <ExternalLink className="w-5 h-5 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide mb-0.5">
+                Live Demo
+              </p>
+              <p className="text-sm font-medium text-primary truncate group-hover:underline">
+                {model.liveLink}
+              </p>
+            </div>
+            <ExternalLink className="w-4 h-4 text-primary/50 group-hover:text-primary shrink-0 transition-colors" />
+          </a>
+        )}
+
         {/* Content Tabs */}
         <Tabs defaultValue="overview" className="w-full">
           <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">

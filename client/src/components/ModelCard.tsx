@@ -1,7 +1,8 @@
 import { Model } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Eye, Download, Activity, Clock, ShieldCheck, CheckCircle } from "lucide-react";
+import { CardContent, CardHeader } from "@/components/ui/card";
+import { HolographicCard } from "@/components/ui/HolographicCard";
+import { Eye, Download, Activity, Clock, CheckCircle } from "lucide-react";
 import { Link } from "wouter";
 import { formatCount } from "@/lib/format-utils";
 
@@ -17,9 +18,16 @@ export function ModelCard({ model, mode = "action", subscribed = false, currentU
   const publisherDisplay = mode === "preview" && isOwnModel ? "you" : model.publisherName;
   return (
     <Link href={`/model/${model.id}`} className="block h-full">
-      <Card className="group overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-md h-full flex flex-col cursor-pointer">
+      <HolographicCard className="h-full flex flex-col overflow-hidden">
+        {/* Diagonal glass shine */}
+        <div
+          className="pointer-events-none absolute inset-0 z-10 rounded-xl"
+          style={{
+            background: "linear-gradient(135deg, transparent 25%, rgba(255,255,255,0.02) 30%, rgba(255,255,255,0.07) 40%, rgba(255,255,255,0.07) 55%, rgba(255,255,255,0.02) 62%, transparent 68%)",
+          }}
+        />
         <CardHeader className="p-0">
-          <div className="h-2 bg-gradient-to-r from-primary to-purple-400 group-hover:h-3 transition-all duration-300" />
+          <div className="h-1 bg-gradient-to-r from-primary via-purple-400 to-accent group-hover:h-2 transition-all duration-300" />
         </CardHeader>
         <CardContent className="p-6 flex-1 flex flex-col gap-4">
           {/* Header with categories and price badge */}
@@ -55,7 +63,7 @@ export function ModelCard({ model, mode = "action", subscribed = false, currentU
                 +{model.categories.length - 2} more
               </p>
             )}
-            <h3 className="font-heading font-bold text-lg leading-tight group-hover:text-primary transition-colors">
+            <h3 className="font-heading font-bold text-lg leading-tight text-foreground group-hover:text-primary transition-colors">
               {model.name}
             </h3>
             <p className="text-xs text-muted-foreground">by {publisherDisplay}</p>
@@ -84,7 +92,7 @@ export function ModelCard({ model, mode = "action", subscribed = false, currentU
             </div>
           </div>
         </CardContent>
-      </Card>
+      </HolographicCard>
     </Link>
   );
 }

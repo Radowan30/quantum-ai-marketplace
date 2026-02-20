@@ -91,6 +91,7 @@ export default function CreateModelPage() {
   const [priceType, setPriceType] = useState<"free" | "paid" | "">("");
   const [price, setPrice] = useState("");
   const [detailedDescription, setDetailedDescription] = useState("");
+  const [liveLink, setLiveLink] = useState("");
 
   // Tab 2: Technical Details state
   const [featuresInput, setFeaturesInput] = useState("");
@@ -419,6 +420,7 @@ export default function CreateModelPage() {
         accuracy: parseFloat(accuracy),
         apiDocumentation: apiSpec || null,
         apiSpecFormat: apiSpecFormat,
+        liveLink: liveLink.trim() || null,
         publisherId: user.id,
         status: statusOverride || 'published', // Default to 'published', unless saving as draft
         subscriptionType: priceType,
@@ -1040,6 +1042,20 @@ export default function CreateModelPage() {
                            )}
                         </div>
                       )}
+
+                      <div className="space-y-2">
+                         <Label>
+                           Live Link
+                         </Label>
+                         <Input
+                           placeholder="https://your-model-demo.example.com"
+                           value={liveLink}
+                           onChange={(e) => setLiveLink(e.target.value)}
+                         />
+                         <p className="text-xs text-muted-foreground">
+                           Link to a live hosted version users can try out.
+                         </p>
+                      </div>
 
                       <div className="space-y-2">
                          <Label>Detailed Description</Label>

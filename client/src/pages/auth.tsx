@@ -10,7 +10,6 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { Check } from "lucide-react";
-import generatedImage from '@assets/generated_images/mimos_ai_marketplace_hero_background.png';
 import { supabase } from "@/lib/supabase";
 
 export default function AuthPage() {
@@ -480,27 +479,22 @@ export default function AuthPage() {
 
   return (
     <Layout type="public">
-      <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-6 bg-secondary/20 relative">
-         <div className="absolute inset-0 z-0 opacity-5 pointer-events-none">
-          <img
-            src={generatedImage}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-6 relative overflow-hidden">
+         {/* Quantum Background */}
+        {/* Background handled by Layout's QuantumBackground */}
 
-        <Card className="w-full max-w-md shadow-xl border-border/50 relative z-10">
+        <Card className="w-full max-w-md glass-pro z-10 neon-border">
           <CardHeader className="text-center space-y-2">
             <div className="mx-auto w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-md mb-2">
               <span className="text-primary-foreground font-bold text-xl">M</span>
             </div>
-            <CardTitle className="text-2xl font-heading">
-              {isRegistering ? "Create Account" : "Welcome to MIMOS"}
+            <CardTitle className="text-2xl font-heading neon-text">
+              {isRegistering ? "Create Quantum ID" : "Welcome to Quantum AI"}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-muted-foreground/80">
               {isRegistering
-                ? "Register to start managing AI models or subscribe to services"
-                : "Login to manage models or subscribe to AI services"
+                ? "Register to start managing Quantum-Ready models or subscribe"
+                : "Login to access the National Quantum AI Hub"
               }
             </CardDescription>
           </CardHeader>

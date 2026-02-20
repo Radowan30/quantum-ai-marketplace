@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS public.models (
   updated_at timestamp with time zone DEFAULT now(),
   api_spec_format text DEFAULT 'text'::text,
   short_description text NOT NULL DEFAULT ''::text,
+  live_link text,
   CONSTRAINT models_pkey PRIMARY KEY (id),
   CONSTRAINT models_publisher_id_fkey FOREIGN KEY (publisher_id) REFERENCES users(id) ON DELETE CASCADE,
   CONSTRAINT models_accuracy_check CHECK ((accuracy >= 0::numeric) AND (accuracy <= 100::numeric)),
@@ -110,6 +111,7 @@ CREATE TABLE IF NOT EXISTS public.models (
 COMMENT ON TABLE public.models IS 'AI models published by publishers';
 COMMENT ON COLUMN public.models.short_description IS 'Brief summary of the model (max 700 characters), shown in cards and at top of detail page';
 COMMENT ON COLUMN public.models.detailed_description IS 'Detailed description of the model, shown in the Detailed Description section';
+COMMENT ON COLUMN public.models.live_link IS 'Optional URL to a live hosted/demo version of the model that users can interact with';
 
 -- =====================================================
 -- MODEL_CATEGORIES TABLE (Junction)

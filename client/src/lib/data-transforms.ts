@@ -57,6 +57,7 @@ export function transformDatabaseModel(dbModel: any): Model {
     collaborators: collaborators,
     apiDocumentation: dbModel.api_documentation,
     apiSpecFormat: dbModel.api_spec_format || 'text',
+    liveLink: dbModel.live_link || undefined,
     pageViews30Days: dbModel.page_views_30_days || 0,
     totalViews: dbModel.total_views || 0,
     activeSubscribers: dbModel.active_subscribers || 0,
