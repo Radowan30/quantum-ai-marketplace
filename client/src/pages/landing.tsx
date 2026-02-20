@@ -3,22 +3,25 @@ import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/Footer";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
-  Box,
-  Cpu,
   Store,
   Download,
   Network,
   BarChart3,
   Globe,
   Upload,
+  Atom,
+  Zap,
 } from "lucide-react";
-import generatedImage from "@assets/generated_images/mimos_ai_marketplace_hero_background.png";
+import { HolographicCard } from "@/components/ui/HolographicCard";
+import { SpotlightText } from "@/components/ui/SpotlightText";
 
 export default function Landing() {
   const [location] = useLocation();
+
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   // Handle hash navigation (e.g., /#features)
   useEffect(() => {
@@ -49,17 +52,31 @@ export default function Landing() {
   }, [location]); // Re-run when location (pathname) changes
 
   return (
-    <Layout type="public">
+    <Layout type="public" showBackground={false}>
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[700px] flex items-center pt-20 pb-24">
         {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src={generatedImage}
-            alt="MIMOS AI Marketplace"
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        {/* Quantum Background with Overlay */}
+        {/* Video Background with Overlay */}
+        <div className="absolute inset-0 z-0 bg-black">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            onLoadedData={() => setVideoLoaded(true)}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+              videoLoaded ? "opacity-60" : "opacity-0"
+            }`}
+          >
+            <source src="/hero_background_vid.mp4" type="video/mp4" />
+          </video>
+          {/* Gradient Overlay for Text Readability (Left) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-background/50 to-transparent"></div>
+          {/* Gradient Overlay for Vignette (Right) */}
+          <div className="absolute inset-0 bg-gradient-to-l from-background/80 via-background/20 to-transparent"></div>
+          {/* Radial Vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background/20 to-background opacity-50"></div>
         </div>
 
         <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
@@ -68,19 +85,22 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 backdrop-blur-sm neon-border">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
               </span>
-              Malaysia's National AI Hub
+              Malaysia's National Quantum AI Hub
             </div>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-700 to-indigo-600 pb-2">
-              The Future of AI Model Integration
+            <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight mb-6 pb-2 cursor-default">
+              <SpotlightText className="block leading-tight" spotlightColor="rgba(139, 92, 246, 1)">
+                <span className="block neon-text">The Quantum Leap in</span>
+                <span className="block neon-text">AI Model Integration</span>
+              </SpotlightText>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-xl">
               Discover, deploy, and contribute to Malaysia's premier ecosystem
-              of sovereign AI models. Bridging research and industry
+              of sovereign Quantum-Ready AI models. Bridging research and industry
               implementation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -112,63 +132,67 @@ export default function Landing() {
             className="hidden md:block relative"
           >
             {/* Visual Abstract Elements */}
-            <div className="relative z-10 bg-white/5 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-2xl">
+            <HolographicCard className="p-6 neon-border bg-black/40" spotlightColor="rgba(139, 92, 246, 0.15)">
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-background/80 rounded-xl border border-border shadow-sm">
+                <div className="flex items-center justify-between p-4 bg-black/60 rounded-xl border border-white/10 shadow-sm backdrop-blur-md">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                      <Cpu className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30">
+                      <Atom className="w-5 h-5 text-accent animate-spin-slow" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm">
-                        MySejahtera Analytics
+                      <h4 className="font-bold text-sm text-foreground">
+                        Q-Optimized Logistics
                       </h4>
                       <p className="text-xs text-muted-foreground">
-                        Version 2.1.0 • Healthcare
+                        Quantum Annealing • Supply Chain
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-mono text-green-600 font-bold">
-                      98.5% Acc
+                    <p className="text-xs font-mono text-accent font-bold drop-shadow-md">
+                      99.9% Opt
                     </p>
                     <p className="text-[10px] text-muted-foreground">
-                      Updated 2h ago
+                      Updated 10m ago
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between p-4 bg-background/80 rounded-xl border border-border shadow-sm opacity-80 scale-95 origin-top">
+                <div className="flex items-center justify-between p-4 bg-black/60 rounded-xl border border-white/10 shadow-sm opacity-90 scale-95 origin-top backdrop-blur-md">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                      <Box className="w-5 h-5 text-blue-600" />
+                    <div className="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center border border-blue-500/30">
+                      <Zap className="w-5 h-5 text-blue-400" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm">Bahasa Sentiment v1</h4>
+                      <h4 className="font-bold text-sm text-foreground">Bahasa Sentiment Q1</h4>
                       <p className="text-xs text-muted-foreground">
-                        NLP • Social Media
+                        Hybrid NLP • Social Media
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-mono text-green-600 font-bold">
-                      94.2% Acc
+                    <p className="text-xs font-mono text-blue-400 font-bold">
+                      98.2% Acc
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
+            </HolographicCard>
 
             {/* Decorative blobs */}
-            <div className="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl z-0" />
-            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl z-0" />
+            <div className="absolute -top-10 -right-10 w-64 h-64 bg-primary/30 rounded-full blur-[100px] z-0 animate-pulse pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-accent/20 rounded-full blur-[100px] z-0 pointer-events-none" />
           </motion.div>
         </div>
       </section>
 
       {/* Powered by MIMOS */}
-      <section className="py-16 border-y border-border/40 bg-secondary/30">
-        <div className="container mx-auto px-4 md:px-6 text-center">
+      <section className="py-16 relative overflow-hidden bg-black border-y border-white/10">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+        </div>
+        <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
           <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-8">
             Powered by MIMOS Berhad
           </p>
@@ -196,7 +220,9 @@ export default function Landing() {
       </section>
 
       {/* Powerful Features Section */}
-      <section id="features" className="py-24 bg-slate-50 dark:bg-slate-900/50">
+      <section id="features" className="py-24 bg-black relative z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-primary/5 to-transparent"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-primary/15 rounded-full blur-[200px] pointer-events-none"></div>
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -209,7 +235,7 @@ export default function Landing() {
               Powerful Features
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to discover, deploy, and monetize AI models
+              Everything you need to discover, deploy, and monetize Quantum-Ready AI models
             </p>
           </motion.div>
 
@@ -220,16 +246,18 @@ export default function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl border-none bg-white dark:bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 text-center flex flex-col h-full min-h-[280px]"
+              className="h-full"
             >
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                <Store className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">AI Model Marketplace</h3>
-              <p className="text-muted-foreground leading-relaxed flex-grow">
-                Discover and access cutting-edge AI models from leading
-                publishers worldwide
-              </p>
+              <HolographicCard className="p-8 h-full flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  <Store className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-foreground">Quantum Model Marketplace</h3>
+                <p className="text-muted-foreground leading-relaxed flex-grow">
+                  Discover and access cutting-edge Quantum and Hybrid AI models from leading
+                  publishers worldwide
+                </p>
+              </HolographicCard>
             </motion.div>
 
             {/* Direct Model Access */}
@@ -238,16 +266,18 @@ export default function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl border-none bg-white dark:bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 text-center flex flex-col h-full min-h-[280px]"
+              className="h-full"
             >
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                <Download className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Direct Model Access</h3>
-              <p className="text-muted-foreground leading-relaxed flex-grow">
-                Download and utilize AI models directly through our secure
-                platform interface
-              </p>
+              <HolographicCard className="p-8 h-full flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  <Download className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-foreground">Instant Quantum Access</h3>
+                <p className="text-muted-foreground leading-relaxed flex-grow">
+                  Download and utilize Q-optimized models directly through our secure
+                  platform interface
+                </p>
+              </HolographicCard>
             </motion.div>
 
             {/* Publisher Network */}
@@ -256,15 +286,17 @@ export default function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl border-none bg-white dark:bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 text-center flex flex-col h-full min-h-[280px]"
+              className="h-full"
             >
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                <Network className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Publisher Network</h3>
-              <p className="text-muted-foreground leading-relaxed flex-grow">
-                Connect with AI model publishers and monetize your innovations
-              </p>
+              <HolographicCard className="p-8 h-full flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  <Network className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Publisher Network</h3>
+                <p className="text-muted-foreground leading-relaxed flex-grow">
+                  Connect with AI model publishers and monetize your innovations
+                </p>
+              </HolographicCard>
             </motion.div>
 
             {/* Analytics Dashboard */}
@@ -273,15 +305,17 @@ export default function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl border-none bg-white dark:bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 text-center flex flex-col h-full min-h-[280px]"
+              className="h-full"
             >
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                <BarChart3 className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Analytics Dashboard</h3>
-              <p className="text-muted-foreground leading-relaxed flex-grow">
-                Track usage, performance, and revenue with detailed analytics
-              </p>
+              <HolographicCard className="p-8 h-full flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  <BarChart3 className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Analytics Dashboard</h3>
+                <p className="text-muted-foreground leading-relaxed flex-grow">
+                  Track usage, performance, and revenue with detailed analytics
+                </p>
+              </HolographicCard>
             </motion.div>
 
             {/* Global Reach */}
@@ -290,16 +324,18 @@ export default function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl border-none bg-white dark:bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 text-center flex flex-col h-full min-h-[280px]"
+              className="h-full"
             >
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                <Globe className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Global Reach</h3>
-              <p className="text-muted-foreground leading-relaxed flex-grow">
-                Access models from developers worldwide with multi-currency
-                support
-              </p>
+              <HolographicCard className="p-8 h-full flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  <Globe className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Global Reach</h3>
+                <p className="text-muted-foreground leading-relaxed flex-grow">
+                  Access models from developers worldwide with multi-currency
+                  support
+                </p>
+              </HolographicCard>
             </motion.div>
 
             {/* Publish & Monetize */}
@@ -308,25 +344,28 @@ export default function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl border-none bg-white dark:bg-card shadow-lg hover:shadow-xl transition-shadow duration-300 text-center flex flex-col h-full min-h-[280px]"
+              className="h-full"
             >
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                <Upload className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Publish & Monetize</h3>
-              <p className="text-muted-foreground leading-relaxed flex-grow">
-                Upload your trained models, manage versions, and gain visibility
-                within the national ecosystem
-              </p>
+              <HolographicCard className="p-8 h-full flex flex-col items-center text-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                  <Upload className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Publish & Monetize</h3>
+                <p className="text-muted-foreground leading-relaxed flex-grow">
+                  Upload your quantum algorithms, manage versions, and gain visibility
+                  within the national ecosystem
+                </p>
+              </HolographicCard>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-800 opacity-90"></div>
+      <section className="py-20 relative overflow-hidden bg-black border-t border-white/10">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
         </div>
         <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
           <motion.div
@@ -335,7 +374,7 @@ export default function Landing() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold font-heading text-white mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold font-heading text-white mb-6 neon-text">
               Ready to Transform Your AI Journey?
             </h2>
             <p className="text-purple-100 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">

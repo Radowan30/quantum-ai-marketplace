@@ -197,11 +197,19 @@ export default function MarketplacePage() {
 
   return (
     <Layout type="dashboard">
-      <div className="space-y-8">
+      <div className="relative z-0">
+          {/* Background Ambient */}
+          <div className="fixed inset-0 pointer-events-none z-[-1]">
+             <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] opacity-40"></div>
+             <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[100px] opacity-40"></div>
+          </div>
+      </div>
+
+      <div className="space-y-8 relative z-10">
         <div>
-          <h1 className="text-3xl font-heading font-bold mb-2">Marketplace</h1>
+          <h1 className="text-3xl font-heading font-bold mb-2 neon-text">Quantum Model Marketplace</h1>
           <p className="text-muted-foreground">
-            Explore AI models from Malaysia's top researchers and institutions.
+            Explore Quantum-Ready AI models from Malaysia's top researchers and institutions.
           </p>
         </div>
 
@@ -218,7 +226,7 @@ export default function MarketplacePage() {
         )}
 
         {/* Filter Controls: search, price, ownership (publishers only), and category */}
-        <div className="flex flex-col gap-4 bg-card p-4 rounded-lg border border-border shadow-sm">
+        <div className="flex flex-col gap-4 glass-pro p-4 rounded-lg neon-border">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative w-full md:w-96">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />

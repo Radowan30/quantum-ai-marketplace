@@ -1,11 +1,11 @@
-# 🤖 AI Model Marketplace
+# 🤖 Quantum AI Model Marketplace
 
-A comprehensive platform for publishing, discovering, and subscribing to AI models. Publishers can showcase their AI models with detailed documentation, pricing, and collaboration features, while buyers can browse, subscribe to, and download models.
+A comprehensive platform for publishing, discovering, and subscribing to Quantum AI models. Publishers can showcase their Quantum AI models with detailed documentation, pricing, and collaboration features, while buyers can browse, subscribe to, and download models.
 
 ## ✨ Features
 
 ### For Publishers
-- **Model Management**: Create, edit, and publish AI models with rich descriptions
+- **Model Management**: Create, edit, and publish Quantum AI models with rich descriptions
 - **Collaboration**: Add collaborators to co-manage models
 - **Analytics Dashboard**: Track views, subscribers, ratings, and revenue
 - **File Management**: Upload model files or link external resources
@@ -13,7 +13,7 @@ A comprehensive platform for publishing, discovering, and subscribing to AI mode
 - **Real-time Notifications**: Get notified of subscriptions, ratings, and discussions
 
 ### For Buyers
-- **Model Discovery**: Browse and search through published AI models
+- **Model Discovery**: Browse and search through published Quantum AI models
 - **Subscription Management**: Subscribe to models and track active subscriptions
 - **Ratings & Reviews**: Rate models and participate in discussions
 - **Activity Tracking**: View your subscription and interaction history
@@ -87,7 +87,7 @@ npm install
 1. Go to [Supabase Dashboard](https://app.supabase.com/)
 2. Click "New Project"
 3. Fill in your project details:
-   - **Name**: AI Model Marketplace
+   - **Name**: Quantum AI Marketplace
    - **Database Password**: Choose a strong password (save this!)
    - **Region**: Choose closest to your users
 4. Click "Create new project" and wait for setup to complete
@@ -133,6 +133,259 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.notifications;
 SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
 ```
 You should see 15+ tables listed.
+
+#### Set Up Storage Bucket for Model Files
+
+The Quantum AI Marketplace uses Supabase Storage for model file uploads. You need to create a storage bucket and configure access policies:
+
+1. **Create Storage Bucket**:
+   - In Supabase Dashboard, go to **Storage** (left sidebar)
+   - Click **New Bucket**
+   - Configure:
+     - **Name**: `model-files`
+     - **Public bucket**: ❌ **Keep disabled** (private bucket with controlled access)
+     - **File size limit**: `52428800` (50 MB)
+   - Click **Create bucket**
+
+2. **Set Up Storage Policies** (Choose Method A or Method B):
+
+   Storage policies control who can upload, download, and delete files. You need to create 3 policies total.
+
+   ### Method A: Using SQL Editor (Recommended - Easier)
+
+   1. In Supabase Dashboard, go to **SQL Editor** (left sidebar)
+   2. Click **New Query**
+   3. Copy and paste ALL THREE policy statements below into the editor
+   4. Click **Run** (or press Ctrl+Enter)
+
+   ```sql
+   -- Policy 1: Allow owners and collaborators to upload
+   CREATE POLICY "Allow owners and collaborators to upload"
+   ON storage.objects FOR INSERT
+   TO authenticated
+   WITH CHECK (
+     bucket_id = 'model-files' AND (
+       (storage.foldername(name))[1] = auth.uid()::text
+       OR
+       EXISTS (
+         SELECT 1
+         FROM models m
+         JOIN collaborators c ON c.model_id = m.id
+         JOIN users u ON u.id = auth.uid()
+         WHERE (storage.foldername(objects.name))[1] = m.publisher_id::text
+           AND (storage.foldername(objects.name))[2] = m.id::text
+           AND lower(c.email) = lower(u.email)
+       )
+     )
+   );
+
+   -- Policy 2: Allow owners, subscribers, and collaborators to download
+   CREATE POLICY "Allow owners, subscribers, and collaborators to download"
+   ON storage.objects FOR SELECT
+   TO authenticated
+   USING (
+     bucket_id = 'model-files' AND (
+       (storage.foldername(name))[1] = auth.uid()::text
+       OR
+       EXISTS (
+         SELECT 1
+         FROM model_files mf
+         JOIN subscriptions s ON s.model_id = mf.model_id
+         WHERE mf.file_path = objects.name
+           AND s.buyer_id = auth.uid()
+           AND s.status = 'active'
+       )
+       OR
+       EXISTS (
+         SELECT 1
+         FROM model_files mf
+         JOIN collaborators c ON c.model_id = mf.model_id
+         JOIN users u ON u.id = auth.uid()
+         WHERE mf.file_path = objects.name
+           AND lower(c.email) = lower(u.email)
+       )
+     )
+   );
+
+   -- Policy 3: Allow owners and collaborators to delete
+   CREATE POLICY "Allow owners and collaborators to delete"
+   ON storage.objects FOR DELETE
+   TO authenticated
+   USING (
+     bucket_id = 'model-files' AND (
+       (storage.foldername(name))[1] = auth.uid()::text
+       OR
+       EXISTS (
+         SELECT 1
+         FROM model_files mf
+         JOIN collaborators c ON c.model_id = mf.model_id
+         JOIN users u ON u.id = auth.uid()
+         WHERE mf.file_path = objects.name
+           AND lower(c.email) = lower(u.email)
+       )
+     )
+   );
+   ```
+
+   ✅ You should see "Success. No rows returned" for each policy.
+
+   ---
+
+   ### Method B: Using Storage UI (Alternative)
+
+   If you prefer the UI, create each policy separately:
+
+   #### Policy 1: Upload Policy
+
+   1. Go to **Storage** → `model-files` bucket → **Policies** tab
+   2. Click **New Policy**
+   3. Click **For full customization**
+   4. Fill in the form:
+
+   **Policy name** field - paste:
+   ```
+   Allow owners and collaborators to upload
+   ```
+
+   **Allowed operation** dropdown - select:
+   ```
+   INSERT
+   ```
+
+   **Target roles** dropdown - select:
+   ```
+   authenticated
+   ```
+
+   **WITH CHECK** field - paste this EXACT code:
+   ```sql
+   bucket_id = 'model-files' AND (
+     (storage.foldername(name))[1] = auth.uid()::text
+     OR
+     EXISTS (
+       SELECT 1
+       FROM models m
+       JOIN collaborators c ON c.model_id = m.id
+       JOIN users u ON u.id = auth.uid()
+       WHERE (storage.foldername(objects.name))[1] = m.publisher_id::text
+         AND (storage.foldername(objects.name))[2] = m.id::text
+         AND lower(c.email) = lower(u.email)
+     )
+   )
+   ```
+
+   5. Click **Review** → **Save policy**
+
+   #### Policy 2: Download Policy
+
+   1. Click **New Policy** again
+   2. Click **For full customization**
+   3. Fill in the form:
+
+   **Policy name** field - paste:
+   ```
+   Allow owners, subscribers, and collaborators to download
+   ```
+
+   **Allowed operation** dropdown - select:
+   ```
+   SELECT
+   ```
+
+   **Target roles** dropdown - select:
+   ```
+   authenticated
+   ```
+
+   **USING** field - paste this EXACT code:
+   ```sql
+   bucket_id = 'model-files' AND (
+     (storage.foldername(name))[1] = auth.uid()::text
+     OR
+     EXISTS (
+       SELECT 1
+       FROM model_files mf
+       JOIN subscriptions s ON s.model_id = mf.model_id
+       WHERE mf.file_path = objects.name
+         AND s.buyer_id = auth.uid()
+         AND s.status = 'active'
+     )
+     OR
+     EXISTS (
+       SELECT 1
+       FROM model_files mf
+       JOIN collaborators c ON c.model_id = mf.model_id
+       JOIN users u ON u.id = auth.uid()
+       WHERE mf.file_path = objects.name
+         AND lower(c.email) = lower(u.email)
+     )
+   )
+   ```
+
+   4. Click **Review** → **Save policy**
+
+   #### Policy 3: Delete Policy
+
+   1. Click **New Policy** again
+   2. Click **For full customization**
+   3. Fill in the form:
+
+   **Policy name** field - paste:
+   ```
+   Allow owners and collaborators to delete
+   ```
+
+   **Allowed operation** dropdown - select:
+   ```
+   DELETE
+   ```
+
+   **Target roles** dropdown - select:
+   ```
+   authenticated
+   ```
+
+   **USING** field - paste this EXACT code:
+   ```sql
+   bucket_id = 'model-files' AND (
+     (storage.foldername(name))[1] = auth.uid()::text
+     OR
+     EXISTS (
+       SELECT 1
+       FROM model_files mf
+       JOIN collaborators c ON c.model_id = mf.model_id
+       JOIN users u ON u.id = auth.uid()
+       WHERE mf.file_path = objects.name
+         AND lower(c.email) = lower(u.email)
+     )
+   )
+   ```
+
+   4. Click **Review** → **Save policy**
+
+   ---
+
+3. **Verify Storage Setup**:
+
+   Go to **SQL Editor** and run:
+   ```sql
+   -- Check bucket exists
+   SELECT id, name, public, file_size_limit
+   FROM storage.buckets
+   WHERE name = 'model-files';
+
+   -- Check policies are active (should return 3 policies)
+   SELECT policyname, cmd
+   FROM pg_policies
+   WHERE schemaname = 'storage'
+     AND tablename = 'objects'
+     AND policyname LIKE '%model-files%'
+   ORDER BY policyname;
+   ```
+
+   Expected results:
+   - ✅ Bucket `model-files` exists with `public = false`
+   - ✅ Three policies: INSERT, SELECT, DELETE
 
 ### 4. Configure Environment Variables
 

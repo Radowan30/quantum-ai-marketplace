@@ -1,6 +1,7 @@
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 import { Toaster } from "@/components/ui/toaster";
+import { QuantumBackground } from "@/components/ui/QuantumBackground";
 import { useState } from "react";
 
 interface LayoutProps {
@@ -9,11 +10,12 @@ interface LayoutProps {
   showSidebar?: boolean;
 }
 
-export function Layout({ children, type = "public", showSidebar = true }: LayoutProps) {
+export function Layout({ children, type = "public", showSidebar = true, showBackground = true }: LayoutProps & { showBackground?: boolean }) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
+    <div className="min-h-screen bg-background font-sans text-foreground relative selection:bg-primary/30">
+      {showBackground && <QuantumBackground />}
       <Navbar
         layout={type}
         onMobileSidebarToggle={() => setMobileSidebarOpen(!mobileSidebarOpen)}

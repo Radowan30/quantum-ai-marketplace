@@ -92,8 +92,12 @@ export default function AboutPage() {
       </section>
 
       {/* Vision Section */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
-        <div className="container mx-auto px-6">
+      <section className="py-20 relative overflow-hidden bg-black border-y border-white/10">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+        </div>
+        <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -164,8 +168,12 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
-        <div className="container mx-auto px-6">
+      <section className="py-20 relative overflow-hidden bg-black border-y border-white/10">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+        </div>
+        <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

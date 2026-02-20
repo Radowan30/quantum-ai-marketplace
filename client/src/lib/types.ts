@@ -59,6 +59,7 @@ export interface Model {
   collaborators?: Collaborator[]; // Array of collaborators with name and email
   apiDocumentation?: string; // API docs in markdown, JSON, or plain text
   apiSpecFormat?: "json" | "yaml" | "markdown" | "text"; // Format of API specification
+  liveLink?: string; // Optional URL to a live hosted version of the model
   pageViews30Days: number;
   totalViews: number;
   activeSubscribers: number;

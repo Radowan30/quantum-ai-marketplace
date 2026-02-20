@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Bell } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNotifications } from "@/hooks/use-notifications";
 import { useAuth } from "@/hooks/use-auth";
 import { NotificationCenter } from "@/components/NotificationCenter";
@@ -17,7 +17,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebarOpen = false }: NavbarProps) {
-  const [scrolled, setScrolled] = useState(false);
+
   const [location, setLocation] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationDialogOpen, setNotificationDialogOpen] = useState(false);
@@ -37,25 +37,13 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
     return false;
   }).length;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
 
   const isDashboard = layout === "dashboard";
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-        isDashboard
-          ? "bg-background/95 backdrop-blur-sm border-border"
-          : scrolled
-          ? "bg-background/95 backdrop-blur-sm shadow-sm border-border"
-          : "bg-transparent border-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur-md backdrop-saturate-150 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.05)]"
     >
       <div className={`${isDashboard ? "px-4 md:px-6" : "container mx-auto px-6"} h-16 md:h-16 flex items-center justify-between py-2 md:py-0`}>
         {/* Hamburger Menu - Left side on mobile for dashboard */}
@@ -88,11 +76,11 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
             <div className="w-5 h-5 bg-primary rounded-md flex items-center justify-center shadow-sm">
               <span className="text-primary-foreground font-bold text-xs tracking-tighter">M</span>
             </div>
-            <span className="font-heading font-bold text-[9px] leading-none text-foreground">
+            <span className="font-heading font-bold text-[9px] leading-none text-foreground neon-text">
               MIMOS
             </span>
             <span className="text-[6px] tracking-wider uppercase opacity-70 text-muted-foreground leading-none">
-              AI Marketplace
+              Quantum AI
             </span>
           </div>
 
@@ -102,11 +90,11 @@ export function Navbar({ layout = "public", onMobileSidebarToggle, mobileSidebar
               <span className="text-primary-foreground font-bold text-xl tracking-tighter">M</span>
             </div>
             <div className="flex flex-col">
-              <span className={`font-heading font-bold leading-none ${scrolled || isDashboard ? "text-foreground" : "text-foreground"}`}>
+              <span className="font-heading font-bold leading-none text-foreground neon-text">
                 MIMOS
               </span>
-              <span className={`text-[10px] tracking-wider uppercase opacity-70 ${scrolled || isDashboard ? "text-muted-foreground" : "text-muted-foreground"}`}>
-                AI Marketplace
+              <span className="text-[10px] tracking-wider uppercase opacity-70 text-muted-foreground">
+                Quantum AI
               </span>
             </div>
           </div>

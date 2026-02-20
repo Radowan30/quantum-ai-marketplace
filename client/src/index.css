@@ -55,115 +55,229 @@
 
   --font-sans: "Inter", sans-serif;
   --font-heading: "Plus Jakarta Sans", sans-serif;
-  
+
   --radius: 0.5rem;
 }
 
+html,
+body {
+  overscroll-behavior: none;
+}
+
 :root {
-  /* MIMOS Brand Colors */
-  /* Primary: Deep Magenta #981E7D -> HSL 313 67% 36% */
-  /* Secondary: Grey #A8A9AD -> HSL 228 3% 67% */
-  
-  --background: 0 0% 98%; /* Clean white/light grey */
-  --foreground: 313 40% 10%; /* Very dark purple-ish grey for text */
+  /* Quantum AI Marketplace - Quantum Theme */
 
-  --card: 0 0% 100%;
-  --card-foreground: 313 40% 10%;
+  /* Deep Space Black/Purple Background */
+  --background: 260 50% 5%;
+  /* Soft White Text */
+  --foreground: 210 40% 98%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 313 40% 10%;
+  /* Card Background - Slightly lighter than main background */
+  --card: 260 50% 8%;
+  --card-foreground: 210 40% 98%;
 
-  --primary: 313 67% 36%; /* MIMOS Deep Magenta */
-  --primary-foreground: 0 0% 100%;
+  --popover: 260 50% 8%;
+  --popover-foreground: 210 40% 98%;
 
-  --secondary: 228 10% 90%; /* Light grey for secondary backgrounds */
-  --secondary-foreground: 313 67% 20%; /* Darker magenta for contrast */
+  /* Primary: Electric Violet */
+  --primary: 270 90% 60%;
+  --primary-foreground: 210 40% 98%;
 
-  --muted: 228 10% 95%;
-  --muted-foreground: 228 5% 45%;
+  /* Secondary: Deep Indigo */
+  --secondary: 240 80% 60%;
+  --secondary-foreground: 210 40% 98%;
 
-  --accent: 313 20% 95%; /* Very light magenta tint */
-  --accent-foreground: 313 67% 36%;
+  --muted: 260 30% 15%;
+  --muted-foreground: 260 20% 65%;
+
+  /* Accent: Neon Magenta */
+  --accent: 300 100% 50%;
+  --accent-foreground: 210 40% 98%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 228 5% 90%;
-  --input: 228 5% 90%;
-  --ring: 313 67% 36%;
+  --border: 260 30% 20%;
+  --input: 260 30% 20%;
+  --ring: 270 90% 60%;
 
   --radius: 0.5rem;
 
-  --chart-1: 313 67% 36%; /* Primary */
-  --chart-2: 280 60% 45%; /* Purple */
-  --chart-3: 330 70% 50%; /* Pinker */
-  --chart-4: 228 3% 67%;  /* Grey */
-  --chart-5: 45 90% 60%;  /* Gold/Yellow accent */
+  --chart-1: 270 90% 60%;
+  /* Primary Violet */
+  --chart-2: 300 100% 50%;
+  /* Magenta */
+  --chart-3: 180 100% 50%;
+  /* Cyan */
+  --chart-4: 240 80% 60%;
+  /* Indigo */
+  --chart-5: 45 90% 60%;
+  /* Gold */
 
-  --sidebar: 0 0% 100%;
-  --sidebar-foreground: 313 40% 10%;
-  --sidebar-primary: 313 67% 36%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 313 20% 96%;
-  --sidebar-accent-foreground: 313 67% 36%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 313 67% 36%;
+  --sidebar: 260 50% 5%;
+  --sidebar-foreground: 210 40% 98%;
+  --sidebar-primary: 270 90% 60%;
+  --sidebar-primary-foreground: 210 40% 98%;
+  --sidebar-accent: 260 30% 15%;
+  --sidebar-accent-foreground: 210 40% 98%;
+  --sidebar-border: 260 30% 20%;
+  --sidebar-ring: 270 90% 60%;
 }
 
 .dark {
-  /* Dark mode mappings (if needed later, but prioritizing light for "Clean white or light grey") */
-  --background: 313 40% 5%; 
-  --foreground: 0 0% 98%;
+  /* Dark mode is the default, so we mirror the root values or adjust slightly if needed */
+  --background: 260 50% 5%;
+  --foreground: 210 40% 98%;
 
-  --card: 313 40% 8%;
-  --card-foreground: 0 0% 98%;
+  --card: 260 50% 8%;
+  --card-foreground: 210 40% 98%;
 
-  --popover: 313 40% 8%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 260 50% 8%;
+  --popover-foreground: 210 40% 98%;
 
-  --primary: 313 67% 45%; /* Slightly lighter for dark mode */
-  --primary-foreground: 0 0% 100%;
+  --primary: 270 90% 60%;
+  --primary-foreground: 210 40% 98%;
 
-  --secondary: 313 20% 15%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 240 80% 60%;
+  --secondary-foreground: 210 40% 98%;
 
-  --muted: 313 20% 15%;
-  --muted-foreground: 313 10% 65%;
+  --muted: 260 30% 15%;
+  --muted-foreground: 260 20% 65%;
 
-  --accent: 313 20% 20%;
-  --accent-foreground: 0 0% 98%;
+  --accent: 300 100% 50%;
+  --accent-foreground: 210 40% 98%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 313 20% 20%;
-  --input: 313 20% 20%;
-  --ring: 313 67% 45%;
+  --border: 260 30% 20%;
+  --input: 260 30% 20%;
+  --ring: 270 90% 60%;
 
-  --chart-1: 313 67% 45%;
-  --chart-2: 280 60% 55%;
-  --chart-3: 330 70% 60%;
-  --chart-4: 228 3% 67%;
+  --chart-1: 270 90% 60%;
+  --chart-2: 300 100% 50%;
+  --chart-3: 180 100% 50%;
+  --chart-4: 240 80% 60%;
   --chart-5: 45 90% 60%;
 
-  --sidebar: 313 40% 8%;
-  --sidebar-foreground: 240 4.8% 95.9%;
-  --sidebar-primary: 313 67% 45%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 313 20% 15%;
-  --sidebar-accent-foreground: 240 4.8% 95.9%;
-  --sidebar-border: 313 20% 20%;
-  --sidebar-ring: 313 67% 45%;
+  --sidebar: 260 50% 5%;
+  --sidebar-foreground: 210 40% 98%;
+  --sidebar-primary: 270 90% 60%;
+  --sidebar-primary-foreground: 210 40% 98%;
+  --sidebar-accent: 260 30% 15%;
+  --sidebar-accent-foreground: 210 40% 98%;
+  --sidebar-border: 260 30% 20%;
+  --sidebar-ring: 270 90% 60%;
+}
+
+/* Advanced Quantum Animations */
+@keyframes nebula-pulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+    filter: hue-rotate(45deg);
+  }
+}
+
+@keyframes aurora-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+@keyframes wave-motion {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.55);
+  }
+
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-black/30 backdrop-blur-md border border-white/10;
+  }
+
+
+
+  .neon-border {
+    @apply border border-primary/50 hover:border-primary;
+    transition-property: border-color, box-shadow, background-color;
+    transition-duration: 300ms;
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
+  }
+
+  .neon-border:hover {
+    box-shadow: 0 0 25px rgba(147, 51, 234, 0.6);
+  }
+
+  .neon-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-accent;
+    filter: drop-shadow(0 0 10px rgba(147, 51, 234, 0.5));
+  }
+
+  .quantum-gradient {
+    @apply bg-gradient-to-br from-background via-purple-950/20 to-indigo-950/20;
+  }
+
+
+
+
+
+
+
+  .wave-bg {
+    position: absolute;
+    height: 200px;
+    width: 200%;
+    background: linear-gradient(to right, transparent 0%, rgba(139, 92, 246, 0.1) 50%, transparent 100%);
+    opacity: 0.3;
+    left: 0;
+    bottom: 0;
+    animation: wave-motion 10s linear infinite;
+    pointer-events: none;
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-bold text-primary;
   }
 }
