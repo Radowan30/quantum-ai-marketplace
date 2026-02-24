@@ -54,7 +54,7 @@ export default function Landing() {
   return (
     <Layout type="public" showBackground={false}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[700px] flex items-center pt-20 pb-24">
+      <section className="relative overflow-hidden min-h-[700px] md:min-h-screen flex items-center pt-20 pb-24">
         {/* Background Image with Overlay */}
         {/* Quantum Background with Overlay */}
         {/* Video Background with Overlay */}
@@ -93,15 +93,18 @@ export default function Landing() {
               Malaysia's National Quantum AI Hub
             </div>
             <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight mb-6 pb-2 cursor-default">
-              <SpotlightText className="block leading-tight" spotlightColor="rgba(139, 92, 246, 1)">
+              <SpotlightText
+                className="block leading-tight"
+                spotlightColor="rgba(139, 92, 246, 1)"
+              >
                 <span className="block neon-text">The Quantum Leap in</span>
                 <span className="block neon-text">AI Model Integration</span>
               </SpotlightText>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-xl">
               Discover, deploy, and contribute to Malaysia's premier ecosystem
-              of sovereign Quantum-Ready AI models. Bridging research and industry
-              implementation.
+              of sovereign Quantum-Ready AI models. Bridging research and
+              industry implementation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/auth">
@@ -132,7 +135,10 @@ export default function Landing() {
             className="hidden md:block relative"
           >
             {/* Visual Abstract Elements */}
-            <HolographicCard className="p-6 neon-border bg-black/40" spotlightColor="rgba(139, 92, 246, 0.15)">
+            <HolographicCard
+              className="p-6 neon-border bg-black/40"
+              spotlightColor="rgba(139, 92, 246, 0.15)"
+            >
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-black/60 rounded-xl border border-white/10 shadow-sm backdrop-blur-md">
                   <div className="flex items-center gap-4">
@@ -164,7 +170,9 @@ export default function Landing() {
                       <Zap className="w-5 h-5 text-blue-400" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-foreground">Bahasa Sentiment Q1</h4>
+                      <h4 className="font-bold text-sm text-foreground">
+                        Bahasa Sentiment Q1
+                      </h4>
                       <p className="text-xs text-muted-foreground">
                         Hybrid NLP • Social Media
                       </p>
@@ -187,13 +195,13 @@ export default function Landing() {
       </section>
 
       {/* Powered by MIMOS */}
-      <section className="py-16 relative overflow-hidden bg-black border-y border-white/10">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+      <section className="py-16 relative overflow-hidden bg-gradient-to-br from-violet-200 via-purple-100 to-indigo-200 border-y border-violet-400">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-200/50 to-indigo-200/40 blur-2xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-200/60 via-transparent to-transparent"></div>
         </div>
         <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
-          <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-8">
+          <p className="text-sm font-semibold text-violet-500 uppercase tracking-widest mb-8">
             Powered by MIMOS Berhad
           </p>
           <div className="flex flex-col items-center justify-center">
@@ -210,7 +218,7 @@ export default function Landing() {
                 className="h-24 w-auto md:h-28 lg:h-32 object-contain hover:scale-105 transition-transform duration-300"
               />
             </motion.div>
-            <p className="max-w-3xl text-muted-foreground text-sm leading-relaxed">
+            <p className="max-w-3xl text-slate-600 text-sm leading-relaxed">
               MIMOS is Malaysia's national Applied Research and Development
               Centre that contributes to socio-economic growth through
               innovative technology platforms.
@@ -220,7 +228,10 @@ export default function Landing() {
       </section>
 
       {/* Powerful Features Section */}
-      <section id="features" className="py-24 bg-black relative z-10 overflow-hidden">
+      <section
+        id="features"
+        className="py-24 bg-black relative z-10 overflow-hidden"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-primary/5 to-transparent"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-primary/15 rounded-full blur-[200px] pointer-events-none"></div>
         <div className="container mx-auto px-4 md:px-6">
@@ -235,7 +246,8 @@ export default function Landing() {
               Powerful Features
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to discover, deploy, and monetize Quantum-Ready AI models
+              Everything you need to discover, deploy, and monetize
+              Quantum-Ready AI models
             </p>
           </motion.div>
 
@@ -252,10 +264,12 @@ export default function Landing() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
                   <Store className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-foreground">Quantum Model Marketplace</h3>
+                <h3 className="text-xl font-bold mb-3 text-white">
+                  Quantum Model Marketplace
+                </h3>
                 <p className="text-muted-foreground leading-relaxed flex-grow">
-                  Discover and access cutting-edge Quantum and Hybrid AI models from leading
-                  publishers worldwide
+                  Discover and access cutting-edge Quantum and Hybrid AI models
+                  from leading publishers worldwide
                 </p>
               </HolographicCard>
             </motion.div>
@@ -272,10 +286,12 @@ export default function Landing() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
                   <Download className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-foreground">Instant Quantum Access</h3>
+                <h3 className="text-xl font-bold mb-3 text-white">
+                  Instant Quantum Access
+                </h3>
                 <p className="text-muted-foreground leading-relaxed flex-grow">
-                  Download and utilize Q-optimized models directly through our secure
-                  platform interface
+                  Download and utilize Q-optimized models directly through our
+                  secure platform interface
                 </p>
               </HolographicCard>
             </motion.div>
@@ -292,7 +308,9 @@ export default function Landing() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
                   <Network className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Publisher Network</h3>
+                <h3 className="text-xl font-bold mb-3 text-white">
+                  Publisher Network
+                </h3>
                 <p className="text-muted-foreground leading-relaxed flex-grow">
                   Connect with AI model publishers and monetize your innovations
                 </p>
@@ -311,7 +329,9 @@ export default function Landing() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
                   <BarChart3 className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Analytics Dashboard</h3>
+                <h3 className="text-xl font-bold mb-3 text-white">
+                  Analytics Dashboard
+                </h3>
                 <p className="text-muted-foreground leading-relaxed flex-grow">
                   Track usage, performance, and revenue with detailed analytics
                 </p>
@@ -330,7 +350,9 @@ export default function Landing() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
                   <Globe className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Global Reach</h3>
+                <h3 className="text-xl font-bold mb-3 text-white">
+                  Global Reach
+                </h3>
                 <p className="text-muted-foreground leading-relaxed flex-grow">
                   Access models from developers worldwide with multi-currency
                   support
@@ -350,10 +372,12 @@ export default function Landing() {
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary">
                   <Upload className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Publish & Monetize</h3>
+                <h3 className="text-xl font-bold mb-3 text-white">
+                  Publish & Monetize
+                </h3>
                 <p className="text-muted-foreground leading-relaxed flex-grow">
-                  Upload your quantum algorithms, manage versions, and gain visibility
-                  within the national ecosystem
+                  Upload your quantum algorithms, manage versions, and gain
+                  visibility within the national ecosystem
                 </p>
               </HolographicCard>
             </motion.div>
@@ -362,10 +386,10 @@ export default function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden bg-black border-t border-white/10">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+      <section className="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-200 via-purple-100 to-violet-200 border-t border-violet-400">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-200/50 to-violet-200/40 blur-2xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-200/60 via-transparent to-transparent"></div>
         </div>
         <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
           <motion.div
@@ -374,10 +398,10 @@ export default function Landing() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold font-heading text-white mb-6 neon-text">
+            <h2 className="text-3xl md:text-5xl font-bold font-heading mb-6 bg-clip-text text-transparent bg-gradient-to-r from-violet-700 via-purple-700 to-indigo-700">
               Ready to Transform Your AI Journey?
             </h2>
-            <p className="text-purple-100 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
               Join thousands of developers and start integrating powerful AI
               models today with our platform
             </p>
@@ -385,8 +409,7 @@ export default function Landing() {
               <Link href="/auth?mode=register&tab=buyer">
                 <Button
                   size="lg"
-                  variant="secondary"
-                  className="h-14 px-8 text-lg font-bold shadow-lg hover:scale-105 transition-all"
+                  className="h-14 px-8 text-lg border-violet-700 font-bold shadow-lg shadow-violet-200 hover:scale-105 transition-all"
                 >
                   Create Account
                 </Button>
@@ -395,7 +418,7 @@ export default function Landing() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="h-14 px-8 text-lg border-2 border-white/30 text-white hover:bg-white/10 hover:text-white"
+                  className="h-14 px-8 text-lg border-2 border-violet-300 text-violet-700 hover:bg-violet-50 hover:text-violet-800 transition-all"
                 >
                   Login to Browse
                 </Button>

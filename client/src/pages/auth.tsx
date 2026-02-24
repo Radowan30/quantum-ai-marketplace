@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import { Check } from "lucide-react";
+import { Check, Eye, EyeOff } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 export default function AuthPage() {
@@ -24,6 +24,8 @@ export default function AuthPage() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [sendingReset, setSendingReset] = useState(false);
 
@@ -530,12 +532,22 @@ export default function AuthPage() {
                         </button>
                       )}
                     </div>
-                    <Input id="password" name="password" type="password" required />
+                    <div className="relative">
+                      <Input id="password" name="password" type={showPassword ? "text" : "password"} required className="pr-10" />
+                      <button type="button" onClick={() => setShowPassword(v => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
                   </div>
                   {isRegistering && (
                     <div className="space-y-2">
                       <Label htmlFor="confirm-password">Confirm Password</Label>
-                      <Input id="confirm-password" name="confirm-password" type="password" required />
+                      <div className="relative">
+                        <Input id="confirm-password" name="confirm-password" type={showConfirmPassword ? "text" : "password"} required className="pr-10" />
+                        <button type="button" onClick={() => setShowConfirmPassword(v => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                          {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
                     </div>
                   )}
                   {!isRegistering && (
@@ -603,12 +615,22 @@ export default function AuthPage() {
                         </button>
                       )}
                     </div>
-                    <Input id="pub-password" name="pub-password" type="password" required />
+                    <div className="relative">
+                      <Input id="pub-password" name="pub-password" type={showPassword ? "text" : "password"} required className="pr-10" />
+                      <button type="button" onClick={() => setShowPassword(v => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
                   </div>
                   {isRegistering && (
                     <div className="space-y-2">
                       <Label htmlFor="pub-confirm-password">Confirm Password</Label>
-                      <Input id="pub-confirm-password" name="pub-confirm-password" type="password" required />
+                      <div className="relative">
+                        <Input id="pub-confirm-password" name="pub-confirm-password" type={showConfirmPassword ? "text" : "password"} required className="pr-10" />
+                        <button type="button" onClick={() => setShowConfirmPassword(v => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                          {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
                     </div>
                   )}
                   {!isRegistering && (

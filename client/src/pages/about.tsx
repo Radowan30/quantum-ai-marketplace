@@ -92,10 +92,10 @@ export default function AboutPage() {
       </section>
 
       {/* Vision Section */}
-      <section className="py-20 relative overflow-hidden bg-black border-y border-white/10">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+      <section className="py-20 relative overflow-hidden bg-gradient-to-br from-violet-200 via-purple-100 to-indigo-200 border-y border-violet-400">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-200/50 to-indigo-200/40 blur-2xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-200/60 via-transparent to-transparent"></div>
         </div>
         <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-5xl mx-auto">
@@ -107,14 +107,14 @@ export default function AboutPage() {
               className="text-center"
             >
               <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-violet-200">
                   <Eye className="w-7 h-7 text-white" />
                 </div>
               </div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-slate-900">
                 Our Vision
               </h2>
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+              <p className="text-xl md:text-2xl text-slate-600 leading-relaxed">
                 A world where AI innovation drives progress for everyone
               </p>
             </motion.div>
@@ -168,10 +168,10 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 relative overflow-hidden bg-black border-y border-white/10">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-purple-900/30 opacity-90 blur-xl"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+      <section className="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-200 via-purple-100 to-violet-200 border-y border-violet-400">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-200/50 to-violet-200/40 blur-2xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-200/60 via-transparent to-transparent"></div>
         </div>
         <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-5xl mx-auto">
@@ -180,18 +180,18 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-xl"
+              className="bg-white/80 backdrop-blur-sm border border-violet-200/60 rounded-2xl p-8 md:p-12 shadow-xl shadow-violet-100/50"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-200">
                   <BookOpen className="w-7 h-7 text-white" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-heading font-bold">
+                <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900">
                   Our Story
                 </h2>
               </div>
 
-              <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
                 <p>
                   Founded in 2025, our AI marketplace emerged from a simple
                   observation: while AI technology was advancing rapidly,
@@ -206,25 +206,25 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="mt-10 pt-8 border-t border-border">
+              <div className="mt-10 pt-8 border-t border-slate-200">
                 <div className="grid md:grid-cols-3 gap-8 text-center">
                   <div>
-                    <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600 mb-2">
+                    <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-purple-600 mb-2">
                       2025
                     </div>
-                    <div className="text-sm text-muted-foreground">Founded</div>
+                    <div className="text-sm text-slate-500">Founded</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600 mb-2">
+                    <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-purple-600 mb-2">
                       Global
                     </div>
-                    <div className="text-sm text-muted-foreground">Reach</div>
+                    <div className="text-sm text-slate-500">Reach</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600 mb-2">
+                    <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-purple-600 mb-2">
                       AI First
                     </div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-sm text-slate-500">
                       Innovation
                     </div>
                   </div>

@@ -30,17 +30,21 @@ export default function TermsOfServicePage() {
       </section>
 
       {/* Content Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
+      <section className="py-20 relative overflow-hidden bg-gradient-to-br from-violet-200 via-purple-100 to-indigo-200 border-y border-violet-400">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-200/50 to-indigo-200/40 blur-2xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-200/60 via-transparent to-transparent"></div>
+        </div>
+        <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-xl"
+              className="bg-white/80 backdrop-blur-sm border border-violet-200/60 rounded-2xl p-8 md:p-12 shadow-xl shadow-violet-100/50"
             >
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-lg text-slate-600 leading-relaxed">
                 Content to be added.
               </p>
             </motion.div>
