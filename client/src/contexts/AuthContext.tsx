@@ -136,7 +136,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         localStorage.removeItem('sessionStartTime'); // Clear session start time
 
         // Only redirect if we're not already on public pages
-        if (window.location.pathname !== '/' && window.location.pathname !== '/auth' && window.location.pathname !== '/auth/callback' && window.location.pathname !== '/reset-password') {
+        if (window.location.pathname !== '/' && window.location.pathname !== '/auth' && window.location.pathname !== '/auth/callback' && window.location.pathname !== '/reset-password' && window.location.pathname !== '/email-verified') {
           // Set loading true to prevent ProtectedRoute from redirecting to /auth during logout
           setLoading(true);
           // We're doing a full page reload anyway, so loading state doesn't matter after this
@@ -252,7 +252,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
           // Redirect to appropriate dashboard for the new role
           const targetPath = newRole === 'publisher' ? '/publisher/dashboard' : '/buyer/dashboard';
-          const excludedPaths = [targetPath, '/auth', '/auth/callback', '/reset-password', '/'];
+          const excludedPaths = [targetPath, '/auth', '/auth/callback', '/reset-password', '/', '/email-verified'];
 
           if (!excludedPaths.includes(window.location.pathname)) {
             window.location.href = targetPath;

@@ -14,6 +14,7 @@ import TermsOfServicePage from "@/pages/terms-of-service";
 import ContactSupportPage from "@/pages/contact-support";
 import AuthPage from "@/pages/auth";
 import AuthCallback from "@/pages/auth/callback";
+import EmailVerifiedPage from "@/pages/email-verified";
 import ResetPasswordPage from "@/pages/reset-password";
 import PublisherDashboard from "@/pages/publisher/dashboard";
 import MyModelsPage from "@/pages/publisher/my-models";
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/contact-support" component={ContactSupportPage} />
       <Route path="/auth" component={AuthPage} />
       <Route path="/auth/callback" component={AuthCallback} />
+      <Route path="/email-verified" component={EmailVerifiedPage} />
       <Route path="/reset-password" component={ResetPasswordPage} />
 
       {/* Publisher Routes */}

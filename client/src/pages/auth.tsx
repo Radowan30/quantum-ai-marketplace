@@ -243,7 +243,8 @@ export default function AuthPage() {
         options: {
           data: {
             name: name
-          }
+          },
+          emailRedirectTo: `${window.location.origin}/email-verified`,
         }
       });
 
@@ -281,9 +282,25 @@ export default function AuthPage() {
 
         console.log('User and role created successfully:', result);
 
-        // Don't clear registration flags yet - let AuthContext clear them after fetchUserData completes
-        // This prevents ProtectedRoute from redirecting before roles are loaded
+        // If email confirmation is enabled, data.session will be null —
+        // the user must verify their email before they can sign in.
+        // Show a toast and keep them on the auth page instead of redirecting
+        // to the dashboard (where there is no valid session yet).
+        if (!data.session) {
+          localStorage.removeItem('currentRole');
+          localStorage.removeItem('isRegistering');
+          localStorage.removeItem('registrationStartTime');
+          setLoading(false);
+          toast({
+            title: "Check your email!",
+            description: "We've sent a verification link to your email address. Please verify your account before logging in.",
+          });
+          setIsRegistering(false);
+          return;
+        }
 
+        // Email confirmation is disabled — proceed straight to the dashboard.
+        // Don't clear registration flags yet - let AuthContext clear them after fetchUserData completes.
         toast({
           title: "Account created!",
           description: "Welcome to MIMOS AI Marketplace.",
