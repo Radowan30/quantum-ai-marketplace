@@ -48,8 +48,8 @@ export function transformDatabaseModel(dbModel: any): Model {
     stats: {
       views: dbModel.total_views || 0,
       downloads: dbModel.downloads || 0,
-      accuracy: dbModel.accuracy || 0,
-      responseTime: dbModel.response_time || 0,
+      accuracy: dbModel.accuracy ?? null,
+      responseTime: dbModel.response_time ?? null,
     },
     features: dbModel.features || [],
     updatedAt: dbModel.updated_at || dbModel.created_at,

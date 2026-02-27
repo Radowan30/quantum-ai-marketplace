@@ -1332,7 +1332,9 @@ export default function ModelDetailsPage() {
             </div>
             <div>
               <p className="text-xs text-muted-foreground">Accuracy</p>
-              <p className="font-bold text-lg">{model.stats.accuracy}%</p>
+              <p className="font-bold text-lg">
+                {model.stats.accuracy !== null ? `${model.stats.accuracy}%` : 'Not Applicable'}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -1341,7 +1343,9 @@ export default function ModelDetailsPage() {
             </div>
             <div>
               <p className="text-xs text-muted-foreground">Response time</p>
-              <p className="font-bold text-lg">{model.stats.responseTime}ms</p>
+              <p className="font-bold text-lg">
+                {model.stats.responseTime !== null ? `${model.stats.responseTime}ms` : 'Not Applicable'}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">

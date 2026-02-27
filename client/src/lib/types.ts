@@ -50,8 +50,8 @@ export interface Model {
   stats: {
     views: number;
     downloads: number;
-    accuracy: number;
-    responseTime: number; // in ms
+    accuracy: number | null;
+    responseTime: number | null;
   };
   features: string[];
   updatedAt: string;

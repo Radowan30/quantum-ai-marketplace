@@ -76,11 +76,11 @@ export function ModelCard({ model, mode = "action", subscribed = false, currentU
           <div className="grid grid-cols-2 gap-y-2 gap-x-4 mt-auto pt-4 border-t border-border/50">
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <Activity className="w-3.5 h-3.5 text-primary" />
-              <span>{model.stats.accuracy}% Acc</span>
+              <span>{model.stats.accuracy !== null ? `${model.stats.accuracy}% Acc` : 'N/A Acc'}</span>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <Clock className="w-3.5 h-3.5 text-primary" />
-              <span>{model.stats.responseTime}ms</span>
+              <span>{model.stats.responseTime !== null ? `${model.stats.responseTime}ms` : 'N/A'}</span>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <Eye className="w-3.5 h-3.5" />

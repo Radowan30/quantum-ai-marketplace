@@ -117,8 +117,8 @@ export default function BuyerDashboard() {
             price: sub.models.pricing_tier || 'free',
             status: sub.models.status,
             stats: {
-              accuracy: sub.models.accuracy || 0,
-              responseTime: sub.models.response_time || 0,
+              accuracy: sub.models.accuracy ?? null,
+              responseTime: sub.models.response_time ?? null,
               views: 0,
               downloads: 0
             }

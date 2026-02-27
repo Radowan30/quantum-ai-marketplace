@@ -417,10 +417,14 @@ function generateUpdateMessage(fieldName: string, oldValue: any, newValue: any):
       return `Model features updated`;
 
     case 'response_time':
-      return `Response time updated to ${newValue}ms`;
+      return newValue === null
+        ? `Response time set to Not Applicable`
+        : `Response time updated to ${newValue}ms`;
 
     case 'accuracy':
-      return `Accuracy updated to ${newValue}%`;
+      return newValue === null
+        ? `Accuracy set to Not Applicable`
+        : `Accuracy updated to ${newValue}%`;
 
     case 'api_documentation':
       return `API documentation has been updated`;
