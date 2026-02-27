@@ -98,6 +98,8 @@ export default function CreateModelPage() {
   const [features, setFeatures] = useState<string[]>([]);
   const [responseTime, setResponseTime] = useState("");
   const [accuracy, setAccuracy] = useState("");
+  const [responseTimeNA, setResponseTimeNA] = useState(false);
+  const [accuracyNA, setAccuracyNA] = useState(false);
   const [apiSpecFormat, setApiSpecFormat] = useState("json");
   const [apiSpec, setApiSpec] = useState("");
   const [apiSpecPreview, setApiSpecPreview] = useState(false);
@@ -237,10 +239,9 @@ export default function CreateModelPage() {
 
   // Validation for Tab 2: Technical Details - Response Time and Accuracy are required
   const isTab2Complete = () => {
-    return (
-      responseTime.trim().length > 0 &&
-      accuracy.trim().length > 0
-    );
+    const rtOk = responseTimeNA || responseTime.trim().length > 0;
+    const accOk = accuracyNA || accuracy.trim().length > 0;
+    return rtOk && accOk;
   };
 
   // Validation for Tab 3: Files - At least one file must be added
@@ -304,10 +305,12 @@ export default function CreateModelPage() {
         }
         return null;
       case 'responseTime':
+        if (responseTimeNA) return null;
         if (!responseTime.trim()) return "Response time is required";
         if (parseFloat(responseTime) <= 0) return "Response time must be a positive number";
         return null;
       case 'accuracy':
+        if (accuracyNA) return null;
         if (!accuracy.trim()) return "Accuracy is required";
         const accNum = parseFloat(accuracy);
         if (isNaN(accNum) || accNum < 0 || accNum > 100) return "Accuracy must be between 0 and 100";
@@ -339,6 +342,8 @@ export default function CreateModelPage() {
       priceType !== "" ||
       responseTime.trim().length > 0 ||
       accuracy.trim().length > 0 ||
+      responseTimeNA ||
+      accuracyNA ||
       files.length > 0
     );
   };
@@ -416,8 +421,8 @@ export default function CreateModelPage() {
         detailedDescription: detailedDescription,
         version: version,
         features: features,
-        responseTime: parseFloat(responseTime),
-        accuracy: parseFloat(accuracy),
+        responseTime: responseTimeNA ? null : parseFloat(responseTime),
+        accuracy: accuracyNA ? null : parseFloat(accuracy),
         apiDocumentation: apiSpec || null,
         apiSpecFormat: apiSpecFormat,
         liveLink: liveLink.trim() || null,
@@ -1108,21 +1113,43 @@ export default function CreateModelPage() {
 
                     <div className="grid md:grid-cols-2 gap-6">
                        <div className="space-y-2">
-                          <Label>Response Time (ms) <span className="text-destructive">*</span></Label>
+                          <div className="flex items-center justify-between">
+                            <Label>Response Time (ms)</Label>
+                            <button
+                              type="button"
+                              onClick={() => { setResponseTimeNA(v => !v); setResponseTime(""); }}
+                              className={`text-xs px-2 py-0.5 rounded border transition-colors ${responseTimeNA ? 'bg-primary text-primary-foreground border-primary' : 'bg-transparent text-muted-foreground border-border hover:border-primary/50'}`}
+                            >
+                              Not Applicable
+                            </button>
+                          </div>
                           <Input
                             type="number"
                             placeholder="120"
                             value={responseTime}
                             onChange={(e) => setResponseTime(e.target.value)}
+                            disabled={responseTimeNA}
+                            className={responseTimeNA ? "opacity-50 cursor-not-allowed" : ""}
                           />
                        </div>
                        <div className="space-y-2">
-                          <Label>Accuracy (%) <span className="text-destructive">*</span></Label>
+                          <div className="flex items-center justify-between">
+                            <Label>Accuracy (%)</Label>
+                            <button
+                              type="button"
+                              onClick={() => { setAccuracyNA(v => !v); setAccuracy(""); }}
+                              className={`text-xs px-2 py-0.5 rounded border transition-colors ${accuracyNA ? 'bg-primary text-primary-foreground border-primary' : 'bg-transparent text-muted-foreground border-border hover:border-primary/50'}`}
+                            >
+                              Not Applicable
+                            </button>
+                          </div>
                           <Input
                             type="number"
                             placeholder="98.5"
                             value={accuracy}
                             onChange={(e) => setAccuracy(e.target.value)}
+                            disabled={accuracyNA}
+                            className={accuracyNA ? "opacity-50 cursor-not-allowed" : ""}
                           />
                        </div>
                     </div>
