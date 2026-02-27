@@ -168,6 +168,8 @@ export default function EditModelPage() {
   const [features, setFeatures] = useState<string[]>([]);
   const [responseTime, setResponseTime] = useState("");
   const [accuracy, setAccuracy] = useState("");
+  const [responseTimeNA, setResponseTimeNA] = useState(false);
+  const [accuracyNA, setAccuracyNA] = useState(false);
   const [apiSpecFormat, setApiSpecFormat] = useState("json");
   const [apiSpec, setApiSpec] = useState("");
   const [apiSpecPreview, setApiSpecPreview] = useState(false);
@@ -210,8 +212,20 @@ export default function EditModelPage() {
         setPriceType(fetchedModel.price);
         setPrice(fetchedModel.priceAmount?.toString() || "");
         setFeatures(fetchedModel.features);
-        setResponseTime(fetchedModel.stats.responseTime.toString());
-        setAccuracy(fetchedModel.stats.accuracy.toString());
+        if (fetchedModel.stats.responseTime === null) {
+          setResponseTimeNA(true);
+          setResponseTime("");
+        } else {
+          setResponseTimeNA(false);
+          setResponseTime(fetchedModel.stats.responseTime.toString());
+        }
+        if (fetchedModel.stats.accuracy === null) {
+          setAccuracyNA(true);
+          setAccuracy("");
+        } else {
+          setAccuracyNA(false);
+          setAccuracy(fetchedModel.stats.accuracy.toString());
+        }
         setApiSpec(fetchedModel.apiDocumentation || "");
         setApiSpecFormat(fetchedModel.apiSpecFormat || "json");
         setLiveLink(fetchedModel.liveLink || "");
@@ -484,7 +498,9 @@ export default function EditModelPage() {
 
   // Validation for Tab 2: Technical Details - Response Time and Accuracy are required
   const isTab2Complete = () => {
-    return responseTime.trim().length > 0 && accuracy.trim().length > 0;
+    const rtOk = responseTimeNA || responseTime.trim().length > 0;
+    const accOk = accuracyNA || accuracy.trim().length > 0;
+    return rtOk && accOk;
   };
 
   // Validation for Tab 3: Files - At least one file must be added
@@ -591,18 +607,20 @@ export default function EditModelPage() {
           newValue: features,
         });
       }
-      if (parseFloat(responseTime) !== model.response_time) {
+      const newResponseTime = responseTimeNA ? null : parseFloat(responseTime);
+      if (newResponseTime !== model.stats.responseTime) {
         changes.push({
           field: "response_time",
-          oldValue: model.response_time,
-          newValue: parseFloat(responseTime),
+          oldValue: model.stats.responseTime,
+          newValue: newResponseTime,
         });
       }
-      if (parseFloat(accuracy) !== model.accuracy) {
+      const newAccuracy = accuracyNA ? null : parseFloat(accuracy);
+      if (newAccuracy !== model.stats.accuracy) {
         changes.push({
           field: "accuracy",
-          oldValue: model.accuracy,
-          newValue: parseFloat(accuracy),
+          oldValue: model.stats.accuracy,
+          newValue: newAccuracy,
         });
       }
       if ((apiSpec || null) !== model.api_documentation) {
@@ -648,8 +666,8 @@ export default function EditModelPage() {
         detailedDescription: detailedDescription,
         version: version,
         features: features,
-        responseTime: parseFloat(responseTime),
-        accuracy: parseFloat(accuracy),
+        responseTime: responseTimeNA ? null : parseFloat(responseTime),
+        accuracy: accuracyNA ? null : parseFloat(accuracy),
         apiDocumentation: apiSpec || null,
         apiSpecFormat: apiSpecFormat,
         liveLink: liveLink.trim() || null,
@@ -1508,26 +1526,43 @@ export default function EditModelPage() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label>
-                      Response Time (ms){" "}
-                      <span className="text-destructive">*</span>
-                    </Label>
+                    <div className="flex items-center justify-between">
+                      <Label>Response Time (ms)</Label>
+                      <button
+                        type="button"
+                        onClick={() => { setResponseTimeNA(v => !v); setResponseTime(""); }}
+                        className={`text-xs px-2 py-0.5 rounded border transition-colors ${responseTimeNA ? 'bg-primary text-primary-foreground border-primary' : 'bg-transparent text-muted-foreground border-border hover:border-primary/50'}`}
+                      >
+                        Not Applicable
+                      </button>
+                    </div>
                     <Input
                       type="number"
                       placeholder="120"
                       value={responseTime}
                       onChange={(e) => setResponseTime(e.target.value)}
+                      disabled={responseTimeNA}
+                      className={responseTimeNA ? "opacity-50 cursor-not-allowed" : ""}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>
-                      Accuracy (%) <span className="text-destructive">*</span>
-                    </Label>
+                    <div className="flex items-center justify-between">
+                      <Label>Accuracy (%)</Label>
+                      <button
+                        type="button"
+                        onClick={() => { setAccuracyNA(v => !v); setAccuracy(""); }}
+                        className={`text-xs px-2 py-0.5 rounded border transition-colors ${accuracyNA ? 'bg-primary text-primary-foreground border-primary' : 'bg-transparent text-muted-foreground border-border hover:border-primary/50'}`}
+                      >
+                        Not Applicable
+                      </button>
+                    </div>
                     <Input
                       type="number"
                       placeholder="98.5"
                       value={accuracy}
                       onChange={(e) => setAccuracy(e.target.value)}
+                      disabled={accuracyNA}
+                      className={accuracyNA ? "opacity-50 cursor-not-allowed" : ""}
                     />
                   </div>
                 </div>
